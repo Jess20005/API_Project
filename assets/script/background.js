@@ -1,6 +1,9 @@
 const nasaUrl='https://api.nasa.gov/planetary/apod?api_key=xO8d0RCLIdY6C1PoXiXLhIuaUiKvgaZ0N6BrsflD';
 
-var responseText = document.getElementById('response-text');
+var bgImage = document.getElementById('bgimage');
+console.log (bgImage);
+console.log (bgImage.src);
+bgImage.src="https://www.fillmurray.com/1920/1080";
 
 function getApi(requestUrl) {
   fetch(requestUrl)
@@ -16,8 +19,8 @@ function getApi(requestUrl) {
     .then(function (data) {
       // Make sure to look at the response in the console and read how 404 response is structured.
       console.log(data);
-      console.log(data.url);
+      bgImage.src=data.url;
+      console.log("bgImage is "+bgImage);
     });
 }
-
 getApi(nasaUrl);
