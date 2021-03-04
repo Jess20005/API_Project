@@ -6,7 +6,7 @@ fetch("https://icanhazdadjoke.com/", {
 .then(response => {
 	return response.json();
 }).then((data) => {
-	console.log('RESPONSE ', data)
+	console.log('RESPONSE', data)
 })
 .catch(err => {
 	console.error(err);
