@@ -25,7 +25,8 @@ jokeBtn.addEventListener("click", function () {
 
     // var url = "https://hooks.slack.com/services/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";
     // var url = "https://hooks.slack.com/services/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";
-    var url = "https://dev.oscato.com/jokes4Team4"
+    // var url = "https://dev.oscato.com/jokes4Team4"
+    var url = "https://2873d01ff1ff8b41df332e5c91cc4bf4.m.pipedream.net"
     var payload = { text: data.joke };
     $.post(url, JSON.stringify(payload), function (data) {
       console.log("I just slacked this joke " + JSON.stringify(payload));
