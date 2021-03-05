@@ -22,8 +22,9 @@ jokeBtn.addEventListener("click", function () {
     // 3-4-21 jason.e.jones@gmail.com went back to slack, there were no webhook APIs, so I created a NEW one
     // and tested the joke posting and it worked?  Not sure why or how the webhook was deleted at slack that's really weird
     //
-    
-    var url = "https://hooks.slack.com/services/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";
+
+    // var url = "https://hooks.slack.com/services/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";
+    var url = "https://hooks.slack.com/services/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";
     var payload = { text: data.joke };
     $.post(url, JSON.stringify(payload), function (data) {
       console.log("I just slacked this joke " + JSON.stringify(payload));
