@@ -1,0 +1,16 @@
+.container{
+    text-align: justify;
+    width:90%;
+    max-width:500px;
+    margin:0 auto;
+    padding: 3rem;
+    font-size: 50px;
+}
+
+button{
+    margin-top: 2rem;
+    padding: 1rem;
+    font-size:1rem;
+    background-color: #575654;
+    color: white;
+}
