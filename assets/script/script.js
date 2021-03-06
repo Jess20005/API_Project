@@ -1,7 +1,10 @@
 var jokeBtn = document.getElementById("jokeBtn");
-var jokeText = document.getElementById("jokeText");
+var jokeText = document.querySelector(".jokeText");
+document.addEventListener('DOMContentLoaded', getJoke);
 
-jokeBtn.addEventListener("click", function () {
+jokeBtn.addEventListener("click", getJoke);
+
+function getJoke(){
   
   fetch("https://icanhazdadjoke.com/", {
     headers: {
@@ -12,10 +15,10 @@ jokeBtn.addEventListener("click", function () {
       return response.json();
     })
     .then((data) => {
-    //   console.log("RESPONSE", data.joke);
+      console.log("RESPONSE", data.joke);
     //
     jokeText.innerHTML = data.joke;  // <---- instead of putting this in jokeText -what if you just stuck it right on the banner hero page?
-    
+   
     //
     // code to post jokes to slack
     // Weird - the OLD API link was https://hooks.slack.com/services/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
@@ -35,4 +38,4 @@ jokeBtn.addEventListener("click", function () {
     .catch((err) => {
       console.error(err);       
     });
-})
+};
