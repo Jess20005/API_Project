@@ -13,16 +13,13 @@ function getApi2(requestUrl) {
       });
   }
 
-//   document.addEventListener('DOMContentLoaded', (event) => {
-//     console.log (getApi(nasaUrl));
-//   })
-
-// queryDate="2020-11-11";
 
 $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
+    $( "#datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
+    } );
 
-
-// queryUrl=nasaUrl+"&date="+queryDate;
-// getApi2(queryUrl);
+$("#datepicker").on("change", function(){
+    console.log($(this).val());  
+    queryUrl=nasaUrl+"&date="+$(this).val();
+    getApi2(queryUrl);
+    });
