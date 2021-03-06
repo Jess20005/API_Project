@@ -21,15 +21,13 @@ function getJoke(){
    
     //
     // code to post jokes to slack
-    // Weird - the OLD API link was https://hooks.slack.com/services/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
-    // 3-4-21 jason.e.jones@gmail.com went back to slack, there were no webhook APIs, so I created a NEW one
-    // and tested the joke posting and it worked?  Not sure why or how the webhook was deleted at slack that's really weird
+    // slack wont let you post their webhook "in the clear" and they consider a public github repo "in the clear"
+    // if you DO post their webhook link in the clear they automatically delete the webhook api and send
+    // you an email.
+    // to work around this slack suggested we run it through an API forwarder - so we are using pipedream.
     //
 
-    // var url = "https://hooks.slack.com/services/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";
-    // var url = "https://hooks.slack.com/services/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";
-    // var url = "https://dev.oscato.com/jokes4Team4"
-    var url = "https://2873d01ff1ff8b41df332e5c91cc4bf4.m.pipedream.net"
+    var url = "https://2873d01ff1ff8b41df332e5c91cc4bf4.m.pipedream.net" // this is an API forwarder which is configured to forward to slack
     var payload = { text: data.joke };
     $.post(url, JSON.stringify(payload), function (data) {
       console.log("I just slacked this joke " + JSON.stringify(payload));
