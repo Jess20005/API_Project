@@ -4,6 +4,7 @@ var bgImage = document.getElementById('bgimage');
 // default image
 bgImage.src="https://www.fillmurray.com/1920/1080";
 
+
 function getApi(requestUrl) {
   fetch(requestUrl)
     .then(function (response) {
@@ -12,7 +13,7 @@ function getApi(requestUrl) {
     .then(function (data) {
       bgImage.src=data.url;
       bgImage.alt=data.title;
-      return (data);   
     });
+
 }
 getApi(nasaUrl);
