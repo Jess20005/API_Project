@@ -1,8 +1,11 @@
-var jokeBtn = document.getElementById("jokeBtn");
-var jokeText = document.getElementById("jokeText");
+var jokeBtn =  document.querySelector(".jokeBtn");
+var jokeText = document.querySelector(".jokeText");
+document.addEventListener('DOMContentLoaded', getJoke);
 
-jokeBtn.addEventListener("click", function () {
-  
+jokeBtn.addEventListener("click", getJoke);
+var initialCount = 0
+function getJoke(){
+  initialCount++
   fetch("https://icanhazdadjoke.com/", {
     headers: {
       Accept: "application/json",
@@ -12,27 +15,27 @@ jokeBtn.addEventListener("click", function () {
       return response.json();
     })
     .then((data) => {
-    //   console.log("RESPONSE", data.joke);
-    //
-    jokeText.innerHTML = data.joke;  // <---- instead of putting this in jokeText -what if you just stuck it right on the banner hero page?
-    
-    //
-    // code to post jokes to slack
-    // Weird - the OLD API link was https://hooks.slack.com/services/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
-    // 3-4-21 jason.e.jones@gmail.com went back to slack, there were no webhook APIs, so I created a NEW one
-    // and tested the joke posting and it worked?  Not sure why or how the webhook was deleted at slack that's really weird
-    //
+      console.log("RESPONSE", data.joke);
+      localStorage.setItem('dailyJoke', data.joke)
+      jokeText.innerHTML = localStorage.getItem('dailyJoke');  // <---- instead of putting this in jokeText -what if you just stuck it right on the banner hero page?
+   
+      //
+      // code to post jokes to slack
+      // slack wont let you post their webhook "in the clear" and they consider a public github repo "in the clear"
+      // if you DO post their webhook link in the clear they automatically delete the webhook api and send
+      // you an email.
+      // to work around this slack suggested we run it through an API forwarder - so we are using pipedream.
+      //
 
-    // var url = "https://hooks.slack.com/services/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";
-    // var url = "https://hooks.slack.com/services/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";
-    // var url = "https://dev.oscato.com/jokes4Team4"
-    var url = "https://2873d01ff1ff8b41df332e5c91cc4bf4.m.pipedream.net"
-    var payload = { text: data.joke };
-    $.post(url, JSON.stringify(payload), function (data) {
-      console.log("I just slacked this joke " + JSON.stringify(payload));
-    });
-    })
+      var url = "https://2873d01ff1ff8b41df332e5c91cc4bf4.m.pipedream.net" // this is an API forwarder which is configured to forward to slack
+      var payload = { text: data.joke };
+      if (initialCount <= 2) {
+        $.post(url, JSON.stringify(payload), function (data) {
+             console.log("I just slacked this joke " + JSON.stringify(payload));
+          });
+      }
+      })
     .catch((err) => {
       console.error(err);       
     });
-})
+};
