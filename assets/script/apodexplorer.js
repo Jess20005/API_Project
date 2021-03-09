@@ -6,20 +6,34 @@ function getApi2(requestUrl) {
         return response.json();
       })
       .then(function (data) {
-        bgImage.src=data.url;
-        bgImage.alt=data.title;  
-        console.log ("trying to set image again "+data);
-        return (data);
+        console.log(data);
+        if (data.media_type == "image") {    
+          bgImage.src=data.url;
+          console.log("bgImage is "+bgImage.src);
+          bgImage.alt=data.title;  
+        } else {
+          bgImage.src="https://cdn.pixabay.com/photo/2019/02/17/22/01/color-4003283_960_720.jpg";
+          bgImage.atl="On the selected date, the APOD is a video.  But we don't use videos for backgrounds."
+        }
       });
   }
 
 
 $( function() {
-    $( "#datepicker" ).datepicker({dateFormat: 'yy-mm-dd'});
+  //
+  // maxDate: "+0D" so you can't pick a date in the future
+  // minDate: "June 16 1995" is the first image in the APOD
+  //
+
+    $( "#datepicker" ).datepicker({
+      dateFormat: 'yy-mm-dd', 
+      maxDate: "+0D",
+      changeYear: true,
+      minDate: new Date('1995/6/16')
+    });
     } );
 
 $("#datepicker").on("change", function(){
-    console.log($(this).val());  
     queryUrl=nasaUrl+"&date="+$(this).val();
     getApi2(queryUrl);
     });
