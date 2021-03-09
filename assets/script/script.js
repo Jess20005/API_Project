@@ -1,4 +1,4 @@
-var jokeBtn = document.getElementById("jokeBtn");
+var jokeBtn =  document.querySelector(".jokeBtn");
 var jokeText = document.querySelector(".jokeText");
 document.addEventListener('DOMContentLoaded', getJoke);
 
