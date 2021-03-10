@@ -18,7 +18,6 @@ function getApi2(requestUrl) {
       });
   }
 
-
 $( function() {
   //
   // maxDate: "+0D" so you can't pick a date in the future
@@ -33,6 +32,10 @@ $( function() {
     });
     } );
 
+  //
+  // This click listener just waits for a new date from the date picker
+  // which - controversially enough, could just just be a direct click of the calendar
+  //
 $("#datepicker").on("change", function(){
     queryUrl=nasaUrl+"&date="+$(this).val();
     getApi2(queryUrl);
