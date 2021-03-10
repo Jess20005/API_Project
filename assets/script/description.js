@@ -1,12 +1,15 @@
 const nasaUrl = 'https://api.nasa.gov/planetary/apod?api_key=xO8d0RCLIdY6C1PoXiXLhIuaUiKvgaZ0N6BrsflD';
 
-var descriptionBtn = document.getElementById("descrtipionBtn");
-var description = document.getElementById('description');
+// var description = document.getElementById("descrtipionBtn");
+var description = document.getElementById('explanation');
 
-descriptionBtn.addEventListener("click", function () {
-    fetch(nasaUrl)
+window.addEventListener("scroll", function () {
+    document.getElementById("showScroll").innerHTML = window.pageYOffset + "px";
+    document.getElementById("title").textContent = title;
+    document.getElementById("explanation").textContent = explanation;            
+    // fetch(nasaUrl)
 });
-// default image
+// Description of Image of the Day.
 
 function getApi(requestUrl) {
 
@@ -16,32 +19,12 @@ function getApi(requestUrl) {
     })    
     .then(function (data) {
         description.src=nasaUrl;
-        data.explantion = "description";
-
+        data.content = "explanation";
     });
   
 
-//     .then(response => response.json())
-//   .then(data => console.log(data));
 
-       
-    // fetch(requestUrl) {
-    //     .then(function (response) {
-
-    //     return response.json();
-    // })
-    // }
-        // .then(function (data) {
-
-        //     data.title = nasaUrl;
-        //     data.title = "description";
-    
-        // .then(function (data) {
-        //     data.explanation = nasaURL;
-        //     data.explantion = "description";
-        //     });
-        // }
-    }
+}
 
 getApi(nasaUrl);
 
