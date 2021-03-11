@@ -32,7 +32,7 @@ function getJoke(){
 
       var url = "https://2873d01ff1ff8b41df332e5c91cc4bf4.m.pipedream.net" // this is an API forwarder which is configured to forward to slack
       var payload = { text: data.joke };
-      if (initialCount <= 2) {
+      if (initialCount <= 3) {
         $.post(url, JSON.stringify(payload), function (data) {
              console.log("I just slacked this joke " + JSON.stringify(payload));
           });
