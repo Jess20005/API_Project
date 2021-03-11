@@ -3,9 +3,7 @@ var jokeText = document.querySelector(".jokeText");
 document.addEventListener('DOMContentLoaded', getJoke);
 
 jokeBtn.addEventListener("click", getJoke);
-var initialCount = 0
 function getJoke(){
-  initialCount++
   fetch("https://icanhazdadjoke.com/", {
     headers: {
       Accept: "application/json",
@@ -18,7 +16,12 @@ function getJoke(){
       console.log("RESPONSE", data.joke);
       localStorage.setItem('dailyJoke', data.joke)
       jokeText.innerHTML = localStorage.getItem('dailyJoke');  // <---- instead of putting this in jokeText -what if you just stuck it right on the banner hero page?
-   
+      var initialCount = localStorage.getItem('counter')
+      if (initialCount == null) {
+        initialCount = 0
+      }
+      initialCount++
+      localStorage.setItem('counter', initialCount)
       //
       // code to post jokes to slack
       // slack wont let you post their webhook "in the clear" and they consider a public github repo "in the clear"
